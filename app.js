@@ -7,7 +7,7 @@ const birthdayData = {
       "url": "https://i.postimg.cc/kXx1Yr5g/Screenshot-2025-08-27-230900.png",
       "caption": "Special birthday moments together"
     },
-    {
+    { 
       "url": "https://i.postimg.cc/FRRVh8m3/Screenshot-2025-08-27-230723.png",
       "caption": "Adventures and travels"
     },
