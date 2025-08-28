@@ -1,100 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Pops! 🎉</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Happy Birthday Pops!</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            margin: 20px; 
+            background: #f0f0f0; 
+        }
+        .header { 
+            text-align: center; 
+            background: white; 
+            padding: 30px; 
+            margin-bottom: 20px; 
+        }
+        .section { 
+            background: white; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+        }
+        .photos { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 15px; 
+        }
+        .photo { 
+            flex: 1; 
+            min-width: 200px; 
+            text-align: center; 
+        }
+        .photo img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+        }
+        .message { 
+            background: #e8f4f8; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+        }
+    </style>
 </head>
 <body>
-    <!-- Confetti Container -->
-    <div class="confetti-container" id="confettiContainer"></div>
+    <div class="header">
+        <h1>🎉 HAPPY BIRTHDAY POPS! 🎉</h1>
+        <p>Thursday, August 28, 2025</p>
+        <p>🎂 🎈 🎊</p>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="hero">
-        <div class="container">
-            <div class="birthday-decorations">🎂✨🎈</div>
-            <h1 class="birthday-title">Happy Birthday Pops!</h1>
-            <p class="date-display">Celebrating Another Amazing Year</p>
-            <p class="hero-subtitle">Today we celebrate the most incredible dad, husband, and person we know!</p>
-            <button class="btn btn--primary btn--lg surprise-btn" onclick="createConfetti()">
-                🎉 Start the Celebration! 🎉
-            </button>
-        </div>
-    </section>
-
-    <!-- Memories Section -->
-    <section class="memories-section" id="memories">
-        <div class="container">
-            <h2 class="section-title">Beautiful Memories</h2>
-            <div class="photo-grid" id="photoGrid">
-                <!-- Photos will be populated by JavaScript -->
+    <div class="section">
+        <h2>Our Memories</h2>
+        <div class="photos">
+            <div class="photo">
+                <img src="https://i.postimg.cc/kXx1Yr5g/Screenshot-2025-08-27-230900.png">
+                <p>Birthday celebration</p>
+            </div>
+            <div class="photo">
+                <img src="https://i.postimg.cc/FRRVh8m3/Screenshot-2025-08-27-230723.png">
+                <p>Travel adventures</p>
+            </div>
+            <div class="photo">
+                <img src="https://i.postimg.cc/GtgNcGZh/Screenshot-2025-08-27-230813.png">
+                <p>Journey together</p>
+            </div>
+            <div class="photo">
+                <img src="https://i.postimg.cc/y83q8p6q/Screenshot-2025-08-27-230832.png">
+                <p>Scenic moments</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Messages Section -->
-    <section class="messages-section" id="messages">
-        <div class="container">
-            <h2 class="section-title">Why We Love You</h2>
-            <div class="messages-grid" id="messagesGrid">
-                <!-- Messages will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
+    <div class="section">
+        <h2>Why We Love You</h2>
+        <div class="message">Your wisdom guides us</div>
+        <div class="message">Your humor brightens our days</div>
+        <div class="message">Your love surrounds us</div>
+        <div class="message">Your adventures inspire us</div>
+    </div>
 
-    <!-- Wishes Section -->
-    <section class="wishes-section" id="wishes">
-        <div class="container">
-            <h2 class="section-title">Birthday Wishes</h2>
-            <div class="wishes-content">
-                <div class="existing-wishes" id="existingWishes">
-                    <!-- Existing wishes will be populated by JavaScript -->
-                </div>
-                <div class="add-wish-form">
-                    <h3>Add Your Birthday Wish</h3>
-                    <form class="wish-form" id="wishForm">
-                        <div class="form-group">
-                            <label class="form-label" for="wishName">Your Name</label>
-                            <input type="text" id="wishName" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="wishMessage">Your Birthday Message</label>
-                            <textarea id="wishMessage" name="message" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary btn--full-width">
-                            Send Birthday Wishes 🎂
-                        </button>
-                    </form>
-                    <div class="success-message" id="successMessage">
-                        Your birthday wish has been added! 🎉
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="section">
+        <h2>Birthday Wishes</h2>
+        <div class="message"><strong>Your Son:</strong> Thank you for all the adventures and always being there. Happy Birthday!</div>
+        <div class="message"><strong>Family:</strong> Thank you for the laughter, wisdom, and memories. Here's to many more!</div>
+        <div class="message"><strong>Everyone:</strong> You make everything better. Your joy is contagious!</div>
+    </div>
 
-    <!-- Timeline Section -->
-    <section class="timeline-section" id="timeline-section">
-        <div class="container">
-            <h2 class="section-title">Life's Journey</h2>
-            <div class="timeline" id="timeline">
-                <!-- Timeline items will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>Made with ❤️ for the best dad in the world</p>
-            <p>May this new year bring you happiness, health, and all your heart desires</p>
-            <button class="btn btn--secondary back-to-top" onclick="scrollToTop()">
-                Back to Top ⬆️
-            </button>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+    <div style="text-align: center; padding: 20px;">
+        Made with ❤️ for Pops
+    </div>
 </body>
 </html>
