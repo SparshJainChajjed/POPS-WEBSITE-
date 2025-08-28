@@ -3,117 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Pops!</title>
-    <link rel="stylesheet" href="style.css">
+    <title>HAPPY BIRTHDAY POPS!</title>
+    <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f0f8ff; /* Light blue for a festive feel */
+          color: #333;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+          overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+
+        h1 {
+          color: #ff4500; /* Orange for birthday vibe */
+          font-size: 2.5em;
+        }
+
+        h2, h3 {
+          color: #4a4a4a;
+        }
+
+        .gallery {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 20px;
+        }
+
+        .photo-card, .message-card, .wish-card, .timeline-item {
+          background: white;
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          transition: transform 0.3s, box-shadow 0.3s;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+
+        .photo-card img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          margin-bottom: 10px;
+        }
+
+        .wish-card.new-wish.animated {
+          animation: slideIn 0.5s ease-out;
+        }
+
+        #wishForm {
+          max-width: 500px;
+          margin: 20px auto;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        #wishForm input, #wishForm textarea {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 1em;
+        }
+
+        #wishForm button {
+          background-color: #ff4500;
+          color: white;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        #wishForm button:hover {
+          background-color: #e03e00;
+        }
+
+        #surpriseBtn {
+          background-color: #28a745;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 5px;
+          font-size: 1.2em;
+          cursor: pointer;
+          margin: 20px 0;
+          transition: background 0.3s;
+        }
+
+        #surpriseBtn:hover {
+          background-color: #218838;
+        }
+
+        .timeline-item {
+          text-align: left;
+          max-width: 600px;
+          margin: 10px auto;
+        }
+
+        /* Animations */
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0px); }
+        }
+
+        @keyframes slideIn {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        .confetti {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+          to {
+            transform: translateY(100vh) rotate(360deg);
+          }
+        }
+
+        .temp-message {
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #fff;
+          padding: 15px 30px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          font-size: 1.2em;
+          z-index: 1000;
+          animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+          0% { opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+
+        .sparkle {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          background: yellow;
+          border-radius: 50%;
+          opacity: 0;
+          animation: sparkleAnim 2s infinite;
+        }
+
+        @keyframes sparkleAnim {
+          0% { opacity: 0; transform: scale(0); }
+          50% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(0); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+          .gallery, .grid {
+            flex-direction: column;
+          }
+        }
+    </style>
 </head>
 <body>
-    <div class="confetti-container" id="confetti"></div>
-    
-    <header class="hero-section">
-        <div class="container">
-            <h1 class="birthday-title">HAPPY BIRTHDAY POPS!</h1>
-            <div class="birthday-decorations">🎂🎈🎉</div>
-            <p class="date-display">Thursday, August 28, 2025</p>
-            <h2 class="hero-subtitle">Celebrating You Today</h2>
-            <button class="btn btn--primary surprise-btn" id="surpriseBtn">🎁 Surprise!</button>
-        </div>
-    </header>
+    <div class="container">
+        <h1 id="title"></h1>
+        <p id="date"></p>
+        <h2>Our Favorite Memories with Pops</h2>
+        <div id="photosGallery" class="gallery"></div>
+        
+        <h2>Birthday Messages</h2>
+        <div id="messagesGrid" class="grid"></div>
+        
+        <h2>Birthday Wishes for Pops</h2>
+        <div id="existingWishes"></div>
+        
+        <h3>Add Your Wish</h3>
+        <form id="wishForm">
+            <input type="text" id="wishName" placeholder="Your Name (optional)" required>
+            <textarea id="wishInput" placeholder="Your birthday wish..." required></textarea>
+            <button type="submit">Send Wish 🎉</button>
+        </form>
+        
+        <button id="surpriseBtn">Surprise for Pops!</button>
+        
+        <h2>Pops' Life Timeline</h2>
+        <div id="timeline"></div>
+    </div>
+    <script>
+        // Birthday Website JavaScript 
+        // Application data 
+        const birthdayData = { 
+          "title": "HAPPY BIRTHDAY POPS! 🎂🎈🎉", 
+          "date": "Thursday, August 28, 2025", 
+          "photos": [ 
+            { 
+              "src": "images/birthday-cake1.jpg", 
+              "caption": "Birthday celebrations - making memories together!", 
+              "description": "Family birthday celebration with balloons and joy" 
+            }, 
+            { 
+              "src": "images/birthday-cake2.jpg", 
+              "caption": "Family celebrating with cake", 
+              "description": "Pops feeding cake to child during birthday" 
+            }, 
+            { 
+              "src": "images/airport-travel.jpg", 
+              "caption": "Adventures and travels - side by side", 
+              "description": "Father and son traveling together through the airport" 
+            }, 
+            { 
+              "src": "images/lake-view.jpg", 
+              "caption": "Scenic moments - enjoying life's beautiful views", 
+              "description": "Pops enjoying a peaceful boat trip with mountain scenery" 
+            },
+            { 
+              "src": "images/family-hug.jpg", 
+              "caption": "Heartwarming family hug", 
+              "description": "Daughter hugging Pops with love" 
+            }
+          ], 
+          "birthday_messages": [ 
+            "Your wisdom has been our guiding light through every challenge", 
+            "Your humor brings joy and laughter to our everyday moments", 
+            "Your strength gives us confidence to chase our dreams", 
+            "Your adventurous spirit makes every trip unforgettable", 
+            "Your unconditional love makes us feel safe and cherished", 
+            "Your patience helps us learn and grow at our own pace", 
+            "You turn ordinary moments into extraordinary memories" 
+          ], 
+          "family_wishes": [ 
+            { 
+              "name": "Your Son", 
+              "message": "Pops, thank you for all the adventures we've shared and for always being there for me. From birthday celebrations to travel adventures, you make every moment special. Happy Birthday!" 
+            }, 
+            { 
+              "name": "The Family", 
+              "message": "To our amazing Pops - thank you for the laughter, the wisdom, and all the beautiful memories we've created together. Here's to many more!" 
+            }, 
+            { 
+              "name": "Everyone Who Loves You", 
+              "message": "Pops, whether we're celebrating at home or exploring new places, you make everything better. Your joy is contagious and your love surrounds us always." 
+            } 
+          ], 
+          "timeline_events": [ 
+            { 
+              "decade": "Early Years", 
+              "description": "Born with a heart full of dreams and determination" 
+            }, 
+            { 
+              "decade": "Young Adult", 
+              "description": "Building the foundation for an incredible life ahead" 
+            }, 
+            { 
+              "decade": "Family Man", 
+              "description": "Became the amazing husband and father we know and love" 
+            }, 
+            { 
+              "decade": "Adventure Seeker", 
+              "description": "Creating unforgettable memories through travel and exploration" 
+            }, 
+            { 
+              "decade": "Present Day", 
+              "description": "Continuing to inspire us with your zest for life and endless love" 
+            } 
+          ] 
+        }; 
+        // Initialize the application 
+        document.addEventListener('DOMContentLoaded', function() { 
+          console.log('Birthday app initializing...'); 
+          document.getElementById('title').innerHTML = birthdayData.title;
+          document.getElementById('date').innerHTML = birthdayData.date;
+          populatePhotos();
+          populateMessages(); 
+          populateWishes(); 
+          populateTimeline(); 
+          setupEventListeners(); 
+          addFloatingAnimations(); 
+          // Auto-create sparkles after page loads 
+          setTimeout(createSparkles, 2000); 
+          // Add interactive effects after a short delay 
+          setTimeout(addInteractiveEffects, 500);
+          // Celebrate on load since it's the birthday!
+          setTimeout(createConfetti, 1000);
+          showTemporaryMessage('Happy Birthday, Pops! 🎉 Let the celebrations begin!');
+        }); 
 
-    <section class="memories-section">
-        <div class="container">
-            <h2 class="section-title">Our Favorite Memories with Pops</h2>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <div class="photo-frame birthday-celebration">
-                        <div class="photo-content">
-                            <div class="photo-icon">🎉</div>
-                            <div class="photo-overlay">
-                                <p class="photo-title">Birthday Celebration</p>
-                                <p class="photo-desc">Family joy & balloons</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="photo-caption">Birthday celebrations - making memories together!</p>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-frame travel-adventure">
-                        <div class="photo-content">
-                            <div class="photo-icon">✈️</div>
-                            <div class="photo-overlay">
-                                <p class="photo-title">Travel Adventures</p>
-                                <p class="photo-desc">Father & son journeys</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="photo-caption">Adventures and travels - side by side</p>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-frame scenic-moment">
-                        <div class="photo-content">
-                            <div class="photo-icon">⛰️</div>
-                            <div class="photo-overlay">
-                                <p class="photo-title">Scenic Views</p>
-                                <p class="photo-desc">Boat trips & mountains</p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="photo-caption">Scenic moments - enjoying life's beautiful views</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        // Populate photos (new function to display images)
+        function populatePhotos() {
+          const gallery = document.getElementById('photosGallery');
+          if (gallery) {
+            birthdayData.photos.forEach(photo => {
+              const photoCard = document.createElement('div');
+              photoCard.className = 'photo-card';
+              photoCard.innerHTML = `
+                <img src="${photo.src}" alt="${photo.description}">
+                <p>${photo.caption}</p>
+              `;
+              gallery.appendChild(photoCard);
+            });
+          }
+        }
 
-    <section class="messages-section">
-        <div class="container">
-            <h2 class="section-title">Why We Love Pops</h2>
-            <div class="messages-grid" id="messagesGrid">
-                <!-- Messages will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <section class="wishes-section">
-        <div class="container">
-            <h2 class="section-title">Birthday Wishes for Pops</h2>
-            <div class="wishes-content">
-                <div class="existing-wishes" id="existingWishes">
-                    <!-- Existing wishes will be populated by JavaScript -->
-                </div>
-                <div class="add-wish-form">
-                    <h3>Add Your Birthday Wish for Pops</h3>
-                    <form id="wishForm" class="wish-form">
-                        <div class="form-group">
-                            <label for="wishName" class="form-label">Your Name</label>
-                            <input type="text" id="wishName" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="wishMessage" class="form-label">Your Message</label>
-                            <textarea id="wishMessage" name="message" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary">Send Birthday Wish</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="timeline-section">
-        <div class="container">
-            <h2 class="section-title">Pops Through the Years</h2>
-            <div class="timeline" id="timeline">
-                <!-- Timeline events will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>Made with ❤️ for Pops</p>
-            <p>&copy; 2025</p>
-            <button class="btn btn--outline back-to-top" id="backToTop">Back to Top</button>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+        // Populate birthday messages 
+        function populateMessages() { 
+          const messagesGrid = document.getElementById('messagesGrid'); 
+          if (messagesGrid) { 
+            birthdayData.birthday_messages.forEach(message => { 
+              const messageCard = document.createElement('div'); 
+              messageCard.className = 'message-card'; 
+              messageCard.innerHTML = `
+                <p>"${message}"</p>
+              `; 
+              messagesGrid.appendChild(messageCard); 
+            }); 
+          } 
+        } 
+        // Populate existing wishes 
+        function populateWishes() { 
+          const existingWishes = document.getElementById('existingWishes'); 
+          if (existingWishes) { 
+            birthdayData.family_wishes.forEach(wish => { 
+              const wishCard = document.createElement('div'); 
+              wishCard.className = 'wish-card'; 
+              wishCard.innerHTML = `
+                <h4>- ${wish.name}</h4>
+                <p>${wish.message}</p>
+              `; 
+              existingWishes.appendChild(wishCard); 
+            }); 
+          } 
+        } 
+        // Populate timeline 
+        function populateTimeline() { 
+          const timeline = document.getElementById('timeline'); 
+          if (timeline) { 
+            birthdayData.timeline_events.forEach((event, index) => { 
+              const timelineItem = document.createElement('div'); 
+              timelineItem.className = 'timeline-item'; 
+              timelineItem.innerHTML = `
+                <h3>${event.decade}</h3>
+                <p>${event.description}</p>
+              `; 
+              timeline.appendChild(timelineItem); 
+            }); 
+          } 
+        } 
+        // Setup event listeners 
+        function setupEventListeners() { 
+          // Surprise button 
+          const surpriseBtn = document.getElementById('surpriseBtn'); 
+          if (surpriseBtn) { 
+            surpriseBtn.addEventListener('click', function() { 
+              createConfetti(); 
+              showTemporaryMessage('🎉 Surprise! We love you, Pops! 🎉'); 
+              playSpecialEffect(); 
+            }); 
+          } 
+          // Wish form - Enhanced event handling 
+          const wishForm = document.getElementById('wishForm'); 
+          if (wishForm) { 
+            wishForm.addEventListener('submit', function(e) { 
+              console.log('Form submission triggered'); 
+              handleWishSubmission(e); 
+            }); 
+            // Also listen for enter key on textarea 
+            const wishInput = document.getElementById('wishInput'); 
+            if (wishInput) { 
+              wishInput.addEventListener('keypress', function(e) { 
+                if (e.key === 'Enter' && !e.shiftKey) { 
+                  e.preventDefault(); 
+                  wishForm.dispatchEvent(new Event('submit')); 
+                } 
+              }); 
+            } 
+          } 
+        } 
+        // Handle wish submission 
+        function handleWishSubmission(e) { 
+          e.preventDefault(); 
+          const wishInput = document.getElementById('wishInput'); 
+          const wishName = document.getElementById('wishName'); 
+          if (wishInput && wishInput.value.trim()) { 
+            const newWish = { 
+              name: wishName.value.trim() || 'Anonymous', 
+              message: wishInput.value.trim() 
+            }; 
+            addNewWish(newWish); 
+            wishInput.value = ''; 
+            wishName.value = ''; 
+            createCelebrationEffect(); 
+          } else {
+            alert('Please enter a wish message!'); // Added validation feedback
+          }
+        } 
+        // Add new wish to display 
+        function addNewWish(wish) { 
+          const existingWishes = document.getElementById('existingWishes'); 
+          if (existingWishes) { 
+            const wishCard = document.createElement('div'); 
+            wishCard.className = 'wish-card new-wish'; 
+            wishCard.innerHTML = `
+              <h4>- ${wish.name}</h4>
+              <p>${wish.message}</p>
+            `; 
+            existingWishes.prepend(wishCard); 
+            // Animate new wish 
+            setTimeout(() => wishCard.classList.add('animated'), 100); 
+          } 
+        } 
+        // Create confetti effect 
+        function createConfetti() { 
+          const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']; 
+          for (let i = 0; i < 100; i++) { 
+            const confetti = document.createElement('div'); 
+            confetti.className = 'confetti'; 
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; 
+            confetti.style.left = Math.random() * 100 + 'vw'; 
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; 
+            confetti.style.opacity = Math.random() * 0.5 + 0.5;
+            document.body.appendChild(confetti); 
+            setTimeout(() => confetti.remove(), 5000); 
+          } 
+        } 
+        // Show temporary message 
+        function showTemporaryMessage(message) { 
+          const msg = document.createElement('div'); 
+          msg.className = 'temp-message'; 
+          msg.textContent = message; 
+          document.body.appendChild(msg); 
+          setTimeout(() => msg.remove(), 3000); 
+        } 
+        // Play special effect (placeholder for sound or animation) 
+        function playSpecialEffect() { 
+          console.log('Playing special birthday effect!'); 
+          // Could add audio here if desired, e.g., new Audio('sound.mp3').play();
+        } 
+        // Add floating animations 
+        function addFloatingAnimations() { 
+          const elements = document.querySelectorAll('.message-card, .wish-card, .photo-card'); 
+          elements.forEach(el => { 
+            el.style.animation = 'float 3s ease-in-out infinite'; 
+          }); 
+        } 
+        // Create sparkles 
+        function createSparkles() { 
+          const sparkleContainer = document.body; 
+          for (let i = 0; i < 20; i++) { 
+            const sparkle = document.createElement('div'); 
+            sparkle.className = 'sparkle'; 
+            sparkle.style.left = Math.random() * 100 + '%'; 
+            sparkle.style.top = Math.random() * 100 + '%'; 
+            sparkle.style.animationDelay = Math.random() * 2 + 's'; 
+            sparkleContainer.appendChild(sparkle); 
+          } 
+        } 
+        // Add interactive effects 
+        function addInteractiveEffects() { 
+          const cards = document.querySelectorAll('.message-card, .wish-card, .photo-card'); 
+          cards.forEach(card => { 
+            card.addEventListener('mouseover', () => { 
+              card.style.transform = 'scale(1.05)'; 
+              card.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)'; 
+            }); 
+            card.addEventListener('mouseout', () => { 
+              card.style.transform = 'scale(1)'; 
+              card.style.boxShadow = 'none'; 
+            }); 
+          }); 
+        } 
+        // Celebration effect for new wishes 
+        function createCelebrationEffect() { 
+          createConfetti(); 
+          showTemporaryMessage('🎉 New wish added! 🎉'); 
+        }
+    </script>
 </body>
 </html>
