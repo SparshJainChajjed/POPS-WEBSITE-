@@ -1,4 +1,4 @@
- // Birthday Website JavaScript
+// Birthday Website JavaScript
 
 const birthdayData = {
   birthday_messages: [
