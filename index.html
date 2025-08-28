@@ -4,249 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Pops!</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            font-size: 2.5em;
-            color: #2c3e50;
-            margin: 0 0 10px 0;
-        }
-        
-        .date {
-            color: #7f8c8d;
-            font-size: 1.1em;
-            margin-bottom: 15px;
-        }
-        
-        .decorations {
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-        
-        .surprise-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin-top: 15px;
-        }
-        
-        .surprise-btn:hover {
-            background: #2980b9;
-        }
-        
-        .section {
-            background: white;
-            margin: 20px 0;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .photo-card {
-            text-align: center;
-        }
-        
-        .photo-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .photo-caption {
-            margin-top: 8px;
-            color: #555;
-            font-weight: 500;
-        }
-        
-        .messages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .message-card {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            color: #2c3e50;
-        }
-        
-        .wish-card {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .wish-name {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .wish-text {
-            color: #555;
-        }
-        
-        .timeline {
-            border-left: 3px solid #3498db;
-            padding-left: 20px;
-        }
-        
-        .timeline-event {
-            margin-bottom: 20px;
-        }
-        
-        .timeline-decade {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .timeline-desc {
-            color: #555;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #7f8c8d;
-            background: white;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>HAPPY BIRTHDAY POPS!</h1>
-            <div class="decorations">🎂 🎈 🎉</div>
-            <div class="date">Thursday, August 28, 2025</div>
-            <div>Celebrating You Today</div>
-            <button class="surprise-btn" onclick="alert('🎉 Happy Birthday Pops! 🎉')">🎁 Surprise!</button>
-        </header>
+    <div class="confetti-container" id="confetti"></div>
+    
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="birthday-title">HAPPY BIRTHDAY POPS!</h1>
+            <div class="birthday-decorations">🎂🎈🎉</div>
+            <p class="date-display">Thursday, August 28, 2025</p>
+            <h2 class="hero-subtitle">Celebrating You Today</h2>
+            <button class="btn btn--primary surprise-btn" id="surpriseBtn">🎁 Surprise!</button>
+        </div>
+    </header>
 
-        <div class="section">
-            <h2>Our Favorite Memories with Pops</h2>
+    <section class="memories-section">
+        <div class="container">
+            <h2 class="section-title">Our Favorite Memories with Pops</h2>
             <div class="photo-grid">
                 <div class="photo-card">
-                    <img src="https://i.postimg.cc/kXx1Yr5g/Screenshot-2025-08-27-230900.png" alt="Birthday celebration">
-                    <div class="photo-caption">Birthday celebrations - making memories together!</div>
+                    <img src="https://i.postimg.cc/kXx1Yr5g/Screenshot-2025-08-27-230900.png" alt="Birthday Celebration" class="photo-img"/>
+                    <p class="photo-caption">Birthday celebrations - making memories together!</p>
                 </div>
                 <div class="photo-card">
-                    <img src="https://i.postimg.cc/FRRVh8m3/Screenshot-2025-08-27-230723.png" alt="Travel adventure">
-                    <div class="photo-caption">Adventures and travels - side by side</div>
+                    <img src="https://i.postimg.cc/FRRVh8m3/Screenshot-2025-08-27-230723.png" alt="Adventures and travels" class="photo-img"/>
+                    <p class="photo-caption">Adventures and travels - side by side</p>
                 </div>
                 <div class="photo-card">
-                    <img src="https://i.postimg.cc/GtgNcGZh/Screenshot-2025-08-27-230813.png" alt="Journey moments">
-                    <div class="photo-caption">Journey memories together</div>
+                    <img src="https://i.postimg.cc/GtgNcGZh/Screenshot-2025-08-27-230813.png" alt="Scenic moments" class="photo-img"/>
+                    <p class="photo-caption">Scenic moments - enjoying life's beautiful views</p>
                 </div>
                 <div class="photo-card">
-                    <img src="https://i.postimg.cc/y83q8p6q/Screenshot-2025-08-27-230832.png" alt="Scenic moments">
-                    <div class="photo-caption">Scenic moments - enjoying life's beautiful views</div>
+                    <img src="https://i.postimg.cc/y83q8p6q/Screenshot-2025-08-27-230832.png" alt="Boat trip" class="photo-img"/>
+                    <p class="photo-caption">Boat trip with a view</p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="section">
-            <h2>Why We Love Pops</h2>
-            <div class="messages-grid">
-                <div class="message-card">Your wisdom guides us through every challenge</div>
-                <div class="message-card">Your humor brightens our days</div>
-                <div class="message-card">Your strength gives us confidence</div>
-                <div class="message-card">Your love surrounds us always</div>
-                <div class="message-card">Your adventures inspire us</div>
-                <div class="message-card">Your patience helps us grow</div>
+    <section class="messages-section">
+        <div class="container">
+            <h2 class="section-title">Why We Love Pops</h2>
+            <div class="messages-grid" id="messagesGrid">
+                <!-- Messages will be injected here by app.js -->
             </div>
         </div>
+    </section>
 
-        <div class="section">
-            <h2>Birthday Wishes for Pops</h2>
-            <div class="wish-card">
-                <div class="wish-name">Your Son:</div>
-                <div class="wish-text">Pops, thank you for all the adventures we've shared and for always being there for me. From birthday celebrations to travel adventures, you make every moment special. Happy Birthday!</div>
-            </div>
-            <div class="wish-card">
-                <div class="wish-name">The Family:</div>
-                <div class="wish-text">To our amazing Pops - thank you for the laughter, the wisdom, and all the beautiful memories we've created together. Here's to many more!</div>
-            </div>
-            <div class="wish-card">
-                <div class="wish-name">Everyone Who Loves You:</div>
-                <div class="wish-text">Pops, whether we're celebrating at home or exploring new places, you make everything better. Your joy is contagious and your love surrounds us always.</div>
+    <section class="wishes-section">
+        <div class="container">
+            <h2 class="section-title">Birthday Wishes</h2>
+            <form id="wishForm" class="wish-form">
+                <input type="text" id="wishName" placeholder="Your Name" required>
+                <textarea id="wishMessage" placeholder="Your wish..." required></textarea>
+                <button type="submit" class="btn btn--secondary">Add Wish</button>
+            </form>
+            <div class="wishes-list" id="existingWishes">
+                <!-- Wishes will be injected here by app.js -->
             </div>
         </div>
+    </section>
 
-        <div class="section">
-            <h2>Pops Through the Years</h2>
-            <div class="timeline">
-                <div class="timeline-event">
-                    <div class="timeline-decade">Early Years:</div>
-                    <div class="timeline-desc">Born with a heart full of dreams and determination</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-decade">Young Adult:</div>
-                    <div class="timeline-desc">Building the foundation for an incredible life ahead</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-decade">Family Man:</div>
-                    <div class="timeline-desc">Became the amazing husband and father we know and love</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-decade">Adventure Seeker:</div>
-                    <div class="timeline-desc">Creating unforgettable memories through travel and exploration</div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-decade">Present Day:</div>
-                    <div class="timeline-desc">Continuing to inspire us with your zest for life and endless love</div>
-                </div>
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Pops Through the Years</h2>
+            <div class="timeline" id="timeline">
+                <!-- Timeline will be injected here by app.js -->
             </div>
         </div>
+    </section>
 
-        <footer>
-            Made with Love for Pops • 2025
-        </footer>
-    </div>
+    <footer>
+        <div class="container">
+            <p>Made with Love for Pops • 2025</p>
+        </div>
+    </footer>
+    <script src="app.js"></script>
 </body>
 </html>
