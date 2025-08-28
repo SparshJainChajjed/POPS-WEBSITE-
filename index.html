@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pops!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="confetti-container" id="confetti"></div>
+    
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="birthday-title">HAPPY BIRTHDAY POPS!</h1>
+            <div class="birthday-decorations">🎂🎈🎉</div>
+            <p class="date-display">Thursday, August 28, 2025</p>
+            <h2 class="hero-subtitle">Celebrating You Today</h2>
+            <button class="btn btn--primary surprise-btn" id="surpriseBtn">🎁 Surprise!</button>
+        </div>
+    </header>
+
+    <section class="memories-section">
+        <div class="container">
+            <h2 class="section-title">Our Favorite Memories with Pops</h2>
+            <div class="photo-grid">
+                <div class="photo-card">
+                    <div class="photo-frame birthday-celebration">
+                        <div class="photo-content">
+                            <div class="photo-icon">🎉</div>
+                            <div class="photo-overlay">
+                                <p class="photo-title">Birthday Celebration</p>
+                                <p class="photo-desc">Family joy & balloons</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="photo-caption">Birthday celebrations - making memories together!</p>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-frame travel-adventure">
+                        <div class="photo-content">
+                            <div class="photo-icon">✈️</div>
+                            <div class="photo-overlay">
+                                <p class="photo-title">Travel Adventures</p>
+                                <p class="photo-desc">Father & son journeys</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="photo-caption">Adventures and travels - side by side</p>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-frame scenic-moment">
+                        <div class="photo-content">
+                            <div class="photo-icon">⛰️</div>
+                            <div class="photo-overlay">
+                                <p class="photo-title">Scenic Views</p>
+                                <p class="photo-desc">Boat trips & mountains</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="photo-caption">Scenic moments - enjoying life's beautiful views</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="messages-section">
+        <div class="container">
+            <h2 class="section-title">Why We Love Pops</h2>
+            <div class="messages-grid" id="messagesGrid">
+                <!-- Messages will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section class="wishes-section">
+        <div class="container">
+            <h2 class="section-title">Birthday Wishes for Pops</h2>
+            <div class="wishes-content">
+                <div class="existing-wishes" id="existingWishes">
+                    <!-- Existing wishes will be populated by JavaScript -->
+                </div>
+                <div class="add-wish-form">
+                    <h3>Add Your Birthday Wish for Pops</h3>
+                    <form id="wishForm" class="wish-form">
+                        <div class="form-group">
+                            <label for="wishName" class="form-label">Your Name</label>
+                            <input type="text" id="wishName" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="wishMessage" class="form-label">Your Message</label>
+                            <textarea id="wishMessage" name="message" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Send Birthday Wish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Pops Through the Years</h2>
+            <div class="timeline" id="timeline">
+                <!-- Timeline events will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Made with ❤️ for Pops</p>
+            <p>&copy; 2025</p>
+            <button class="btn btn--outline back-to-top" id="backToTop">Back to Top</button>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
