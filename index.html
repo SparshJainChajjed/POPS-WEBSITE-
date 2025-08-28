@@ -1,305 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HAPPY BIRTHDAY POPS!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(120deg, #e3f0ff 0%, #f8f2e7 90%);
-      color: #1f2937;
-    }
-    .confetti {
-      position: fixed;
-      left: 0; top: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 10;
-    }
-    header.hero-section {
-      text-align: center;
-      padding: 48px 16px 24px 16px;
-      background: #fdf6e3;
-      box-shadow: 0 2px 12px rgba(191,154,115,0.07);
-      position: relative;
-    }
-    .birthday-title {
-      font-size: 2.7rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin: 0 0 12px 0;
-      color: #19563b;
-      text-shadow: 0 2px 8px #e7c7894d;
-    }
-    .birthday-decorations {
-      font-size: 2.3rem;
-      margin-bottom: 12px;
-    }
-    .date-display { color: #527d90; font-weight: 500; margin-bottom: 8px; }
-    .hero-subtitle { font-size: 1.3rem; color: #da8308; font-weight: 600; }
-    .surprise-btn {
-      margin: 28px 0 0 0;
-      padding: 14px 36px; font-size: 1.15rem; font-weight: 600; 
-      color: #fff; background: linear-gradient(90deg, #ffac32 25%, #6ce3c2 90%);
-      border-radius: 33px; border: none; box-shadow: 0 1px 8px #f8ae309a; cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .surprise-btn:hover { background: linear-gradient(90deg, #6ce3c2 25%, #ffac32 90%); transform: scale(1.09); }
-
-    /* Memories Section */
-    .memories-section { max-width: 970px; margin: 42px auto 0 auto; padding: 0 12px;}
-    .section-title { text-align:center; font-size:1.6rem; font-weight:700; color:#276e93; margin-bottom:19px; }
-    .photo-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
-    .photo-card {
-      background: #fffce9;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #e0c68b18;
-      overflow: hidden;
-      width: 290px;
-      transition: transform 0.25s, box-shadow 0.25s;
-      text-align: center;
-      position: relative;
-    }
-    .photo-card:hover {
-      box-shadow: 0 8px 32px #e9c6242a;
-      transform: scale(1.04);
-    }
-    .gallery-img {
-      display: block; width: 100%; height: 210px; object-fit: cover;
-      border-bottom: 1px solid #e7dbb9;
-      transition: filter 0.28s;
-    }
-    .photo-card:hover .gallery-img { filter: brightness(1.08) contrast(1.07) saturate(1.12);}
-    .photo-caption {
-      color: #d49129; font-size: 1.08em; padding: 8px 10px 10px 10px; font-weight: 500;
-      background: #fffdf6;
-      border-radius: 0 0 16px 16px;
-    }
-
-    /* Messages Section */
-    .messages-section { margin: 62px auto 0 auto; max-width: 810px; padding: 0 12px; }
-    .messages-section h2 { text-align:center; font-size:1.28rem; color:#23905f; margin-bottom:15px; }
-    .messages-grid { display: flex; flex-wrap: wrap; gap:16px; justify-content:center; }
-    .message-card {
-      background: #ebf4ff;
-      padding: 18px 14px;
-      border-radius: 14px;
-      min-width: 210px;
-      max-width: 310px;
-      color: #20537a;
-      font-size: 1.07em;
-      font-weight: 500;
-      box-shadow: 0 0 14px #7bb9d8a1;
-      margin-bottom: 8px;
-    }
-
-    /* Birthday Wishes Section */
-    .wishes-section { margin:56px auto 0 auto; max-width:670px; padding:0 12px;}
-    .wishes-section h2 { text-align:center; font-size:1.22rem; color:#db3f3f; margin-bottom:12px;}
-    .wish-list { margin-bottom:18px;}
-    .wish-card { background: #feeae6; border-radius: 12px; margin-bottom:9px; padding:14px 14px 8px 14px; box-shadow: 0 0 9px #e7b6a4a1;}
-    .wish-name { color:#be5a23; font-weight:600; margin-bottom: 3px;}
-    .wish-text { color:#8d4162; }
-
-    .wish-form { margin:0 auto; padding:14px; border-radius:10px;background:#f6f9fe;}
-    .wish-form label {font-weight:500; color:#3c97bc; font-size:1.01em;}
-    .wish-form input, .wish-form textarea {
-      width:95%; margin-bottom:8px; padding:7px 8px; border:1px solid #dbc7cc; border-radius:7px; font-size:0.98em; background: #fff;padding-right:16px;
-    }
-    .wish-form textarea {resize:vertical;height:50px;}
-    .wish-form button {padding:7px 18px;background:#d87738;color:#fff;border:none;border-radius:9px;font-weight:600;cursor:pointer;}
-    .wish-form button:hover { background: #ca3c01;}
-    .wish-success { color:#28a462;font-size:0.99em; margin-bottom:7px;}
-
-    /* Timeline Section */
-    .timeline-section { margin: 62px auto 0 auto; max-width: 780px; padding: 0 12px;}
-    .timeline-section h2 { text-align:center; font-size:1.2rem; color:#3b87c5; margin-bottom:18px;}
-    .timeline {border-left: 3px solid #85b7f1;padding-left:22px;}
-    .timeline-event { margin-bottom:23px;}
-    .timeline-decade { color:#2370c1; font-weight: 600; font-size:1.09em;}
-    .timeline-desc { color:#527e86; margin-left:6px; }
-
-    /* Footer */
-    footer { margin:46px 0 0 0; padding: 24px 0 12px 0; text-align: center; font-size: 1em; color:#45946d;background:#f6faf4;border-top:2px solid #ece5ce; }
-    .footer-year { color: #c47421; }
-
-    /* Responsive */
-    @media (max-width:700px){
-      .photo-grid { flex-direction:column; }
-      .photo-card { width:97%; margin: 0 auto; }
-      .messages-grid, .timeline {padding-left:0;}
-      .timeline-section, .wishes-section, .memories-section, .messages-section {padding:0 6px;}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pops!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .date {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .emoji {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+        
+        .photo-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .photo-caption {
+            padding: 15px;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .messages {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .message-card {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #2c3e50;
+            font-weight: 500;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wishes {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wish-card {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wish-name {
+            font-weight: bold;
+            color: #d35400;
+            margin-bottom: 5px;
+        }
+        
+        .wish-text {
+            color: #2c3e50;
+        }
+        
+        .surprise-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border: none;
+            border-radius: 25px;
+            color: #2c3e50;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .surprise-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .photo-section, .messages, .wishes {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <canvas class="confetti" id="confetti-canvas"></canvas>
-  <header class="hero-section">
-    <h1 class="birthday-title">HAPPY BIRTHDAY POPS!</h1>
-    <div class="birthday-decorations">🎂 🎈 🎉</div>
-    <p class="date-display">Thursday, August 28, 2025</p>
-    <h2 class="hero-subtitle">Celebrating You Today</h2>
-    <button class="surprise-btn" onclick="triggerSurprise()">🎁 Surprise!</button>
-  </header>
-
-  <section class="memories-section">
-    <h2 class="section-title">Our Favorite Memories with Pops</h2>
-    <div class="photo-grid">
-      <div class="photo-card">
-        <img src="https://postimg.cc/3khfLBD9/image" alt="Birthday celebrations - making memories together!" class="gallery-img" />
-        <p class="photo-caption">Birthday celebrations - making memories together!</p>
-      </div>
-      <div class="photo-card">
-        <img src="https://postimg.cc/t1Kx5rs4/image" alt="Adventures and travels - side by side" class="gallery-img" />
-        <p class="photo-caption">Adventures and travels - side by side</p>
-      </div>
-      <div class="photo-card">
-        <img src="https://postimg.cc/T5mQ0LdZ/image" alt="Scenic moments - enjoying life's beautiful views" class="gallery-img" />
-        <p class="photo-caption">Scenic moments - enjoying life's beautiful views</p>
-      </div>
-      <div class="photo-card">
-        <img src="https://postimg.cc/w7jQ3GJC/image" alt="Extra birthday memory" class="gallery-img" />
-        <p class="photo-caption">Bonus memory for Pops!</p>
-      </div>
+    <div class="container">
+        <header>
+            <h1>🎉 HAPPY BIRTHDAY POPS! 🎉</h1>
+            <div class="date">Thursday, August 28, 2025</div>
+            <div>
+                <span class="emoji">🎂</span>
+                <span class="emoji">🎈</span>
+                <span class="emoji">🎊</span>
+            </div>
+            <button class="surprise-btn" onclick="celebrate()">🎁 Click for Surprise!</button>
+        </header>
+        
+        <div class="photo-section">
+            <h2>Our Favorite Memories with Pops</h2>
+            <div class="photo-grid">
+                <div class="photo-card">
+                    <img src="https://i.postimg.cc/kXx1Yr5g/Screenshot-2025-08-27-230900.png" alt="Birthday celebration">
+                    <div class="photo-caption">Birthday celebrations - making memories together!</div>
+                </div>
+                <div class="photo-card">
+                    <img src="https://i.postimg.cc/FRRVh8m3/Screenshot-2025-08-27-230723.png" alt="Travel adventure">
+                    <div class="photo-caption">Adventures and travels - side by side</div>
+                </div>
+                <div class="photo-card">
+                    <img src="https://i.postimg.cc/GtgNcGZh/Screenshot-2025-08-27-230813.png" alt="Airport moments">
+                    <div class="photo-caption">Journey memories with Pops</div>
+                </div>
+                <div class="photo-card">
+                    <img src="https://i.postimg.cc/y83q8p6q/Screenshot-2025-08-27-230832.png" alt="Scenic moments">
+                    <div class="photo-caption">Scenic moments - enjoying life's beautiful views</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="messages">
+            <h2>Why We Love Pops</h2>
+            <div class="message-grid">
+                <div class="message-card">Your wisdom guides us through every challenge</div>
+                <div class="message-card">Your humor brightens our days</div>
+                <div class="message-card">Your strength gives us confidence</div>
+                <div class="message-card">Your love surrounds us always</div>
+                <div class="message-card">Your adventures inspire us</div>
+                <div class="message-card">Your patience helps us grow</div>
+            </div>
+        </div>
+        
+        <div class="wishes">
+            <h2>Birthday Wishes for Pops</h2>
+            <div class="wish-card">
+                <div class="wish-name">Your Son:</div>
+                <div class="wish-text">Pops, thank you for all the adventures we've shared and for always being there for me. From birthday celebrations to travel adventures, you make every moment special. Happy Birthday!</div>
+            </div>
+            <div class="wish-card">
+                <div class="wish-name">The Family:</div>
+                <div class="wish-text">To our amazing Pops - thank you for the laughter, the wisdom, and all the beautiful memories we've created together. Here's to many more!</div>
+            </div>
+            <div class="wish-card">
+                <div class="wish-name">Everyone Who Loves You:</div>
+                <div class="wish-text">Pops, whether we're celebrating at home or exploring new places, you make everything better. Your joy is contagious and your love surrounds us always.</div>
+            </div>
+        </div>
+        
+        <footer>
+            Made with ❤️ for Pops • 2025
+        </footer>
     </div>
-  </section>
-
-  <section class="messages-section">
-    <h2>Why We Love Pops</h2>
-    <div class="messages-grid">
-      <div class="message-card">Your wisdom has been our guiding light through every challenge</div>
-      <div class="message-card">Your humor brings joy and laughter to our everyday moments</div>
-      <div class="message-card">Your strength gives us confidence to chase our dreams</div>
-      <div class="message-card">Your adventurous spirit makes every trip unforgettable</div>
-      <div class="message-card">Your unconditional love makes us feel safe and cherished</div>
-      <div class="message-card">Your patience helps us learn and grow at our own pace</div>
-      <div class="message-card">You turn ordinary moments into extraordinary memories</div>
-    </div>
-  </section>
-
-  <section class="wishes-section">
-    <h2>Birthday Wishes for Pops</h2>
-    <div class="wish-list" id="wish-list">
-      <div class="wish-card">
-        <span class="wish-name">Your Son: </span>
-        <span class="wish-text">Pops, thank you for all the adventures we've shared and for always being there for me. From birthday celebrations to travel adventures, you make every moment special. Happy Birthday!</span>
-      </div>
-      <div class="wish-card">
-        <span class="wish-name">The Family: </span>
-        <span class="wish-text">To our amazing Pops - thank you for the laughter, the wisdom, and all the beautiful memories we've created together. Here's to many more!</span>
-      </div>
-      <div class="wish-card">
-        <span class="wish-name">Everyone Who Loves You: </span>
-        <span class="wish-text">Pops, whether we're celebrating at home or exploring new places, you make everything better. Your joy is contagious and your love surrounds us always.</span>
-      </div>
-    </div>
-    <div class="wish-form" id="wish-form-area">
-      <div id="wish-success" class="wish-success" style="display:none;"></div>
-      <form id="wish-form" autocomplete="off" onsubmit="return addWish()">
-        <label for="wishName">Your Name:</label><br>
-        <input type="text" id="wishName" name="wishName" required><br>
-        <label for="wishText">Your Wish:</label><br>
-        <textarea id="wishText" name="wishText" required></textarea><br>
-        <button type="submit">Add Wish</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="timeline-section">
-    <h2>Pops Through the Years</h2>
-    <div class="timeline">
-      <div class="timeline-event">
-        <div class="timeline-decade">Early Years:</div>
-        <div class="timeline-desc">Born with a heart full of dreams and determination</div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-decade">Young Adult:</div>
-        <div class="timeline-desc">Building the foundation for an incredible life ahead</div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-decade">Family Man:</div>
-        <div class="timeline-desc">Became the amazing husband and father we know and love</div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-decade">Adventure Seeker:</div>
-        <div class="timeline-desc">Creating unforgettable memories through travel and exploration</div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-decade">Present Day:</div>
-        <div class="timeline-desc">Continuing to inspire us with your zest for life and endless love</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    Made with Love for Pops. &copy; <span class="footer-year" id="year"></span><br>
-    <a href="#top" style="text-decoration:none;color:#5499d4;font-weight:500;">Back to Top</a>
-  </footer>
-
-  <script>
-    // Auto footer year
-    document.getElementById('year').textContent = (new Date()).getFullYear();
-
-    // Add Birthday Wish (local display only)
-    function addWish() {
-      const name = document.getElementById('wishName').value.trim();
-      const text = document.getElementById('wishText').value.trim();
-      if(name && text){
-        const wishList = document.getElementById('wish-list');
-        const wishDiv = document.createElement('div');
-        wishDiv.className = 'wish-card';
-        wishDiv.innerHTML = '<span class="wish-name">'+escapeHtml(name)+': </span><span class="wish-text">'+escapeHtml(text)+'</span>';
-        wishList.appendChild(wishDiv);
-
-        document.getElementById('wish-success').style.display='block';
-        document.getElementById('wish-success').innerText = 'Wish added!';
-        setTimeout(()=>{document.getElementById('wish-success').style.display='none';}, 2400);
-
-        document.getElementById('wish-form').reset();
-      }
-      return false;
-    }
-    function escapeHtml(str){return str.replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);});}
-
-    // Surprise button - confetti burst!
-    function triggerSurprise(){
-      burstConfetti();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Simple confetti animation
-    function burstConfetti(){
-      const canvas = document.getElementById('confetti-canvas');
-      const ctx = canvas.getContext('2d');
-      const w = canvas.width = window.innerWidth;
-      const h = canvas.height = window.innerHeight;
-      const confettiColors = ['#fcc53e','#34c1ff','#ef2755','#50e3a4','#f3c45b','#e23ebd'];
-      const n = 64;
-      let pieces = [];
-      for(let i=0;i<n;i++){
-        pieces.push({
-          x: Math.random()*w,
-          y: Math.random()*h*0.3,
-          r: 7+Math.random()*12,
-          c: confettiColors[Math.floor(Math.random()*confettiColors.length)],
-          vx: -2+Math.random()*4,
-          vy: Math.random()*3+1.2
-        });
-      }
-      let frame = 0, run = true;
-      function anim(){
-        ctx.clearRect(0,0,w,h);
-        pieces.forEach(p=>{
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-          ctx.fillStyle=p.c; ctx.fill();
-          p.x+=p.vx; p.y+=p.vy;
-          p.vx+=0.02*(Math.random()-0.5); p.vy+=0.1;
-        });
-        frame++;
-        if(run && frame<64){ requestAnimationFrame(anim);}
-        else{canvas.width = canvas.width;} // Clear
-      }
-      anim();
-    }
-  </script>
+    
+    <script>
+        function celebrate() {
+            // Simple celebration effect
+            document.body.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%)';
+            
+            // Create some confetti effect
+            for (let i = 0; i < 50; i++) {
+                createConfetti();
+            }
+            
+            setTimeout(() => {
+                document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }, 3000);
+        }
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-10px';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.background = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'][Math.floor(Math.random() * 5)];
+            confetti.style.zIndex = '1000';
+            confetti.style.pointerEvents = 'none';
+            document.body.appendChild(confetti);
+            
+            let pos = 0;
+            const fall = setInterval(() => {
+                pos += 5;
+                confetti.style.top = pos + 'px';
+                if (pos > window.innerHeight) {
+                    clearInterval(fall);
+                    document.body.removeChild(confetti);
+                }
+            }, 50);
+        }
+    </script>
 </body>
 </html>
