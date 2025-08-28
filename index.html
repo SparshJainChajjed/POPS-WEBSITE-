@@ -1,502 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAPPY BIRTHDAY POPS!</title>
-    <style>
-        body {
-          font-family: 'Arial', sans-serif;
-          background-color: #f0f8ff; /* Light blue for a festive feel */
-          color: #333;
-          margin: 0;
-          padding: 20px;
-          text-align: center;
-          overflow-x: hidden; /* Prevent horizontal scroll from animations */
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POPS • Celebrating Dad</title>
+  <meta name="description" content="A small, fast tribute site celebrating Dad with our favourite memories." />
+  <meta name="theme-color" content="#0f1221" />
+  <meta property="og:title" content="POPS • Celebrating Dad" />
+  <meta property="og:description" content="Love, laughs, trips, and everyday magic." />
+  <meta property="og:type" content="website" />
+  <!-- Preload first image for snappier paint -->
+  <link rel="preload" as="image"
+        href="assets/images/dad/dad1-800.jpg"
+        imagesrcset="assets/images/dad/dad1-800.jpg 800w, assets/images/dad/dad1-1600.jpg 1600w"
+        imagesizes="(max-width: 800px) 100vw, 600px">
 
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-        }
+  <style>
+  /* ---------- Base / Theme ---------- */
+  :root {
+    --bg:#0f1221;
+    --panel:#12162b;
+    --card:#171b33;
+    --text:#e9ebf5;
+    --muted:#b3b8d4;
+    --primary:#6ae3ff;
+    --radius:18px;
+    --ring:3px;
+    --shadow:0 12px 30px rgba(0,0,0,.25);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    background: linear-gradient(180deg, #0b0e1a 0%, #0f1221 40%, #12162b 100%);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: var(--ring) solid #7fe9ff;
+    outline-offset: 2px;
+  }
+  @supports (outline: 1px solid color-mix(in oklab, white, black)) {
+    :focus-visible {
+      outline: var(--ring) solid color-mix(in oklab, var(--primary) 75%, white 25%);
+    }
+  }
+  img { max-width: 100%; height: auto; }
 
-        h1 {
-          color: #ff4500; /* Orange for birthday vibe */
-          font-size: 2.5em;
-        }
+  /* ---------- Layout ---------- */
+  .container { max-width: 1100px; margin-inline: auto; padding-inline: 18px; }
 
-        h2, h3 {
-          color: #4a4a4a;
-        }
+  /* Header / Nav */
+  .site-header {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: saturate(150%) blur(8px);
+    background: rgba(10,12,24,.6);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .nav { display: flex; align-items: center; gap: 20px; min-height: 64px; }
+  .brand { color: var(--text); text-decoration: none; font-weight: 800; letter-spacing: .5px; font-size: 1.15rem; }
+  .menu { margin-left: auto; display: flex; gap: 18px; }
+  .menu a {
+    color: var(--muted); text-decoration: none; padding: 8px 10px; border-radius: 10px;
+  }
+  .menu a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+  .hamburger { display: none; margin-left: auto; background: transparent; border: 0; color: var(--text); font-size: 22px; cursor: pointer; }
 
-        .gallery {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
+  /* Hero */
+  .hero { display: grid; gap: 16px; place-items: start; padding: 64px 0 36px; }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); margin: 0; }
+  .muted { color: var(--muted); }
+  .btn {
+    display: inline-block; background: var(--primary); color:#071018; text-decoration: none;
+    padding: 12px 18px; border-radius: 999px; font-weight: 700;
+    box-shadow: 0 4px 14px rgba(106,227,255,.35); transition: transform .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
 
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-        }
+  /* About */
+  .about { padding: 28px 0 8px; }
+  .about-card {
+    background: var(--card); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+  }
 
-        .photo-card, .message-card, .wish-card, .timeline-item {
-          background: white;
-          padding: 15px;
-          border-radius: 10px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          transition: transform 0.3s, box-shadow 0.3s;
-          max-width: 300px;
-          margin: 0 auto;
-        }
+  /* ---------- Gallery ---------- */
+  #dad-gallery { padding: 40px 0; }
+  #dad-gallery h2 { margin: 0 0 6px; }
 
-        .photo-card img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin-bottom: 10px;
-        }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
 
-        .wish-card.new-wish.animated {
-          animation: slideIn 0.5s ease-out;
-        }
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .15s ease, outline-color .15s ease;
+    outline: 1px solid transparent;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(0,0,0,.35);
+    outline-color: rgba(255,255,255,.08);
+  }
 
-        #wishForm {
-          max-width: 500px;
-          margin: 20px auto;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
+  /* Clickable thumbnail area with fixed aspect ratio; image covers */
+  .thumb { position: relative; display: block; width: 100%; overflow: hidden; }
+  .thumb.landscape { aspect-ratio: 4 / 3; }
+  .thumb.portrait  { aspect-ratio: 3 / 4; }
+  .thumb picture, .thumb img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  }
 
-        #wishForm input, #wishForm textarea {
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          font-size: 1em;
-        }
+  .card figcaption { padding: .7rem .9rem; color: var(--muted); }
 
-        #wishForm button {
-          background-color: #ff4500;
-          color: white;
-          border: none;
-          padding: 10px;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: background 0.3s;
-        }
+  /* Lightbox */
+  .lightbox { border: none; padding: 0; width: min(94vw, 1200px); background: transparent; }
+  .lightbox::backdrop { background: rgba(0,0,0,.6); }
+  .lightbox img { width: 100%; height: auto; display: block; border-radius: 14px; }
+  .lightbox .close {
+    position: absolute; top: 10px; right: 10px;
+    border: 0; background: rgba(0,0,0,.65); color: #fff;
+    width: 38px; height: 38px; border-radius: 50%; font-size: 20px; cursor: pointer;
+  }
 
-        #wishForm button:hover {
-          background-color: #e03e00;
-        }
+  /* Contact + Footer */
+  .contact { padding: 36px 0; }
+  .site-footer {
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 18px 0; margin-top: 18px;
+    background: rgba(10,12,24,.4);
+  }
+  .small { font-size: .9rem; }
 
-        #surpriseBtn {
-          background-color: #28a745;
-          color: white;
-          border: none;
-          padding: 12px 24px;
-          border-radius: 5px;
-          font-size: 1.2em;
-          cursor: pointer;
-          margin: 20px 0;
-          transition: background 0.3s;
-        }
+  /* Mobile menu */
+  @media (max-width: 760px) {
+    .menu {
+      display: none; position: absolute; right: 18px; top: 60px;
+      background: var(--panel); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 10px 8px; flex-direction: column; min-width: 160px;
+    }
+    .menu.open { display: flex; }
+    .hamburger { display: block; }
+  }
 
-        #surpriseBtn:hover {
-          background-color: #218838;
-        }
-
-        .timeline-item {
-          text-align: left;
-          max-width: 600px;
-          margin: 10px auto;
-        }
-
-        /* Animations */
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-          100% { transform: translateY(0px); }
-        }
-
-        @keyframes slideIn {
-          from { transform: translateY(-20px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-
-        .confetti {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          animation: fall 5s linear infinite;
-        }
-
-        @keyframes fall {
-          to {
-            transform: translateY(100vh) rotate(360deg);
-          }
-        }
-
-        .temp-message {
-          position: fixed;
-          top: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: #fff;
-          padding: 15px 30px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          font-size: 1.2em;
-          z-index: 1000;
-          animation: fadeInOut 3s ease-in-out;
-        }
-
-        @keyframes fadeInOut {
-          0% { opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { opacity: 0; }
-        }
-
-        .sparkle {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          background: yellow;
-          border-radius: 50%;
-          opacity: 0;
-          animation: sparkleAnim 2s infinite;
-        }
-
-        @keyframes sparkleAnim {
-          0% { opacity: 0; transform: scale(0); }
-          50% { opacity: 1; transform: scale(1); }
-          100% { opacity: 0; transform: scale(0); }
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-          .gallery, .grid {
-            flex-direction: column;
-          }
-        }
-    </style>
+  /* Respect reduced motion users */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 id="title"></h1>
-        <p id="date"></p>
-        <h2>Our Favorite Memories with Pops</h2>
-        <div id="photosGallery" class="gallery"></div>
-        
-        <h2>Birthday Messages</h2>
-        <div id="messagesGrid" class="grid"></div>
-        
-        <h2>Birthday Wishes for Pops</h2>
-        <div id="existingWishes"></div>
-        
-        <h3>Add Your Wish</h3>
-        <form id="wishForm">
-            <input type="text" id="wishName" placeholder="Your Name (optional)" required>
-            <textarea id="wishInput" placeholder="Your birthday wish..." required></textarea>
-            <button type="submit">Send Wish 🎉</button>
-        </form>
-        
-        <button id="surpriseBtn">Surprise for Pops!</button>
-        
-        <h2>Pops' Life Timeline</h2>
-        <div id="timeline"></div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#">POPS</a>
+      <button class="hamburger" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle menu">☰</button>
+      <nav id="primary-menu" class="menu" data-menu>
+        <a href="#about">About</a>
+        <a href="#dad-gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-    <script>
-        // Birthday Website JavaScript 
-        // Application data 
-        const birthdayData = { 
-          "title": "HAPPY BIRTHDAY POPS! 🎂🎈🎉", 
-          "date": "Thursday, August 28, 2025", 
-          "photos": [ 
-            { 
-              "src": "images/birthday-cake1.jpg", 
-              "caption": "Birthday celebrations - making memories together!", 
-              "description": "Family birthday celebration with balloons and joy" 
-            }, 
-            { 
-              "src": "images/birthday-cake2.jpg", 
-              "caption": "Family celebrating with cake", 
-              "description": "Pops feeding cake to child during birthday" 
-            }, 
-            { 
-              "src": "images/airport-travel.jpg", 
-              "caption": "Adventures and travels - side by side", 
-              "description": "Father and son traveling together through the airport" 
-            }, 
-            { 
-              "src": "images/lake-view.jpg", 
-              "caption": "Scenic moments - enjoying life's beautiful views", 
-              "description": "Pops enjoying a peaceful boat trip with mountain scenery" 
-            },
-            { 
-              "src": "images/family-hug.jpg", 
-              "caption": "Heartwarming family hug", 
-              "description": "Daughter hugging Pops with love" 
-            }
-          ], 
-          "birthday_messages": [ 
-            "Your wisdom has been our guiding light through every challenge", 
-            "Your humor brings joy and laughter to our everyday moments", 
-            "Your strength gives us confidence to chase our dreams", 
-            "Your adventurous spirit makes every trip unforgettable", 
-            "Your unconditional love makes us feel safe and cherished", 
-            "Your patience helps us learn and grow at our own pace", 
-            "You turn ordinary moments into extraordinary memories" 
-          ], 
-          "family_wishes": [ 
-            { 
-              "name": "Your Son", 
-              "message": "Pops, thank you for all the adventures we've shared and for always being there for me. From birthday celebrations to travel adventures, you make every moment special. Happy Birthday!" 
-            }, 
-            { 
-              "name": "The Family", 
-              "message": "To our amazing Pops - thank you for the laughter, the wisdom, and all the beautiful memories we've created together. Here's to many more!" 
-            }, 
-            { 
-              "name": "Everyone Who Loves You", 
-              "message": "Pops, whether we're celebrating at home or exploring new places, you make everything better. Your joy is contagious and your love surrounds us always." 
-            } 
-          ], 
-          "timeline_events": [ 
-            { 
-              "decade": "Early Years", 
-              "description": "Born with a heart full of dreams and determination" 
-            }, 
-            { 
-              "decade": "Young Adult", 
-              "description": "Building the foundation for an incredible life ahead" 
-            }, 
-            { 
-              "decade": "Family Man", 
-              "description": "Became the amazing husband and father we know and love" 
-            }, 
-            { 
-              "decade": "Adventure Seeker", 
-              "description": "Creating unforgettable memories through travel and exploration" 
-            }, 
-            { 
-              "decade": "Present Day", 
-              "description": "Continuing to inspire us with your zest for life and endless love" 
-            } 
-          ] 
-        }; 
-        // Initialize the application 
-        document.addEventListener('DOMContentLoaded', function() { 
-          console.log('Birthday app initializing...'); 
-          document.getElementById('title').innerHTML = birthdayData.title;
-          document.getElementById('date').innerHTML = birthdayData.date;
-          populatePhotos();
-          populateMessages(); 
-          populateWishes(); 
-          populateTimeline(); 
-          setupEventListeners(); 
-          addFloatingAnimations(); 
-          // Auto-create sparkles after page loads 
-          setTimeout(createSparkles, 2000); 
-          // Add interactive effects after a short delay 
-          setTimeout(addInteractiveEffects, 500);
-          // Celebrate on load since it's the birthday!
-          setTimeout(createConfetti, 1000);
-          showTemporaryMessage('Happy Birthday, Pops! 🎉 Let the celebrations begin!');
-        }); 
+  </header>
 
-        // Populate photos (new function to display images)
-        function populatePhotos() {
-          const gallery = document.getElementById('photosGallery');
-          if (gallery) {
-            birthdayData.photos.forEach(photo => {
-              const photoCard = document.createElement('div');
-              photoCard.className = 'photo-card';
-              photoCard.innerHTML = `
-                <img src="${photo.src}" alt="${photo.description}">
-                <p>${photo.caption}</p>
-              `;
-              gallery.appendChild(photoCard);
-            });
-          }
-        }
+  <main>
+    <section class="hero container">
+      <h1>Celebrating Dad</h1>
+      <p class="muted">Love, laughs, trips, and everyday magic.</p>
+      <a href="#dad-gallery" class="btn">View Gallery</a>
+    </section>
 
-        // Populate birthday messages 
-        function populateMessages() { 
-          const messagesGrid = document.getElementById('messagesGrid'); 
-          if (messagesGrid) { 
-            birthdayData.birthday_messages.forEach(message => { 
-              const messageCard = document.createElement('div'); 
-              messageCard.className = 'message-card'; 
-              messageCard.innerHTML = `
-                <p>"${message}"</p>
-              `; 
-              messagesGrid.appendChild(messageCard); 
-            }); 
-          } 
-        } 
-        // Populate existing wishes 
-        function populateWishes() { 
-          const existingWishes = document.getElementById('existingWishes'); 
-          if (existingWishes) { 
-            birthdayData.family_wishes.forEach(wish => { 
-              const wishCard = document.createElement('div'); 
-              wishCard.className = 'wish-card'; 
-              wishCard.innerHTML = `
-                <h4>- ${wish.name}</h4>
-                <p>${wish.message}</p>
-              `; 
-              existingWishes.appendChild(wishCard); 
-            }); 
-          } 
-        } 
-        // Populate timeline 
-        function populateTimeline() { 
-          const timeline = document.getElementById('timeline'); 
-          if (timeline) { 
-            birthdayData.timeline_events.forEach((event, index) => { 
-              const timelineItem = document.createElement('div'); 
-              timelineItem.className = 'timeline-item'; 
-              timelineItem.innerHTML = `
-                <h3>${event.decade}</h3>
-                <p>${event.description}</p>
-              `; 
-              timeline.appendChild(timelineItem); 
-            }); 
-          } 
-        } 
-        // Setup event listeners 
-        function setupEventListeners() { 
-          // Surprise button 
-          const surpriseBtn = document.getElementById('surpriseBtn'); 
-          if (surpriseBtn) { 
-            surpriseBtn.addEventListener('click', function() { 
-              createConfetti(); 
-              showTemporaryMessage('🎉 Surprise! We love you, Pops! 🎉'); 
-              playSpecialEffect(); 
-            }); 
-          } 
-          // Wish form - Enhanced event handling 
-          const wishForm = document.getElementById('wishForm'); 
-          if (wishForm) { 
-            wishForm.addEventListener('submit', function(e) { 
-              console.log('Form submission triggered'); 
-              handleWishSubmission(e); 
-            }); 
-            // Also listen for enter key on textarea 
-            const wishInput = document.getElementById('wishInput'); 
-            if (wishInput) { 
-              wishInput.addEventListener('keypress', function(e) { 
-                if (e.key === 'Enter' && !e.shiftKey) { 
-                  e.preventDefault(); 
-                  wishForm.dispatchEvent(new Event('submit')); 
-                } 
-              }); 
-            } 
-          } 
-        } 
-        // Handle wish submission 
-        function handleWishSubmission(e) { 
-          e.preventDefault(); 
-          const wishInput = document.getElementById('wishInput'); 
-          const wishName = document.getElementById('wishName'); 
-          if (wishInput && wishInput.value.trim()) { 
-            const newWish = { 
-              name: wishName.value.trim() || 'Anonymous', 
-              message: wishInput.value.trim() 
-            }; 
-            addNewWish(newWish); 
-            wishInput.value = ''; 
-            wishName.value = ''; 
-            createCelebrationEffect(); 
-          } else {
-            alert('Please enter a wish message!'); // Added validation feedback
+    <section id="about" class="container about">
+      <article class="about-card">
+        <h2>About</h2>
+        <p>This is our little corner on the internet to celebrate Dad. From goofy selfies to airport walks and quiet lakeside moments—these snapshots say everything.</p>
+      </article>
+    </section>
+
+    <!-- Gallery -->
+    <section id="dad-gallery" class="container">
+      <h2>Dad ❤️</h2>
+      <p class="muted">Some of our favourite moments.</p>
+
+      <div class="gallery">
+        <!-- Card 1 (landscape) -->
+        <figure class="card">
+          <!-- No-JS fallback goes to large image; JS uses data-dialog -->
+          <a class="thumb landscape lightbox-open"
+             href="assets/images/dad/dad1-1600.jpg"
+             data-dialog="#lg-dad1" aria-label="Open larger image: Pure joy at home">
+            <picture>
+              <source type="image/webp"
+                      srcset="assets/images/dad/dad1-800.webp 800w, assets/images/dad/dad1-1600.webp 1600w"
+                      sizes="(max-width: 800px) 100vw, 600px" />
+              <img loading="lazy" decoding="async"
+                   src="assets/images/dad/dad1-800.jpg"
+                   srcset="assets/images/dad/dad1-800.jpg 800w, assets/images/dad/dad1-1600.jpg 1600w"
+                   alt="Dad smiling as he gets a warm hug at home">
+            </picture>
+          </a>
+          <figcaption>Pure joy at home.</figcaption>
+        </figure>
+
+        <!-- Card 2 (portrait) -->
+        <figure class="card">
+          <a class="thumb portrait lightbox-open"
+             href="assets/images/dad/dad2-1600.jpg"
+             data-dialog="#lg-dad2" aria-label="Open larger image: Playful kisses">
+            <picture>
+              <source type="image/webp"
+                      srcset="assets/images/dad/dad2-800.webp 800w, assets/images/dad/dad2-1600.webp 1600w"
+                      sizes="(max-width: 800px) 100vw, 600px" />
+              <img loading="lazy" decoding="async"
+                   src="assets/images/dad/dad2-800.jpg"
+                   srcset="assets/images/dad/dad2-800.jpg 800w, assets/images/dad/dad2-1600.jpg 1600w"
+                   alt="Dad giving a playful cheek kiss in a chair">
+            </picture>
+          </a>
+          <figcaption>Playful kisses.</figcaption>
+        </figure>
+
+        <!-- Card 3 (portrait) -->
+        <figure class="card">
+          <a class="thumb portrait lightbox-open"
+             href="assets/images/dad/dad3-1600.jpg"
+             data-dialog="#lg-dad3" aria-label="Open larger image: Travel buddies">
+            <picture>
+              <source type="image/webp"
+                      srcset="assets/images/dad/dad3-800.webp 800w, assets/images/dad/dad3-1600.webp 1600w"
+                      sizes="(max-width: 800px) 100vw, 600px" />
+              <img loading="lazy" decoding="async"
+                   src="assets/images/dad/dad3-800.jpg"
+                   srcset="assets/images/dad/dad3-800.jpg 800w, assets/images/dad/dad3-1600.jpg 1600w"
+                   alt="Walking side by side on the airport jet bridge with bags">
+            </picture>
+          </a>
+          <figcaption>Travel buddies.</figcaption>
+        </figure>
+
+        <!-- Card 4 (landscape) -->
+        <figure class="card">
+          <a class="thumb landscape lightbox-open"
+             href="assets/images/dad/dad4-1600.jpg"
+             data-dialog="#lg-dad4" aria-label="Open larger image: Lake day reflections">
+            <picture>
+              <source type="image/webp"
+                      srcset="assets/images/dad/dad4-800.webp 800w, assets/images/dad/dad4-1600.webp 1600w"
+                      sizes="(max-width: 800px) 100vw, 600px" />
+              <img loading="lazy" decoding="async"
+                   src="assets/images/dad/dad4-800.jpg"
+                   srcset="assets/images/dad/dad4-800.jpg 800w, assets/images/dad/dad4-1600.jpg 1600w"
+                   alt="Dad looking over a lakeside railing decorated with flowers">
+            </picture>
+          </a>
+          <figcaption>Lake day reflections.</figcaption>
+        </figure>
+      </div>
+
+      <!-- Accessible lightboxes -->
+      <dialog id="lg-dad1" class="lightbox" aria-label="Expanded image: Pure joy at home">
+        <img src="assets/images/dad/dad1-1600.jpg" alt="">
+        <button class="close" aria-label="Close">×</button>
+      </dialog>
+
+      <dialog id="lg-dad2" class="lightbox" aria-label="Expanded image: Playful kisses">
+        <img src="assets/images/dad/dad2-1600.jpg" alt="">
+        <button class="close" aria-label="Close">×</button>
+      </dialog>
+
+      <dialog id="lg-dad3" class="lightbox" aria-label="Expanded image: Travel buddies">
+        <img src="assets/images/dad/dad3-1600.jpg" alt="">
+        <button class="close" aria-label="Close">×</button>
+      </dialog>
+
+      <dialog id="lg-dad4" class="lightbox" aria-label="Expanded image: Lake day reflections">
+        <img src="assets/images/dad/dad4-1600.jpg" alt="">
+        <button class="close" aria-label="Close">×</button>
+      </dialog>
+    </section>
+
+    <section id="contact" class="container contact">
+      <h2>Contact</h2>
+      <p class="muted">Want to share a memory or photo? Email <a href="mailto:hello@example.com">hello@example.com</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container small muted">© <span id="y"></span> POPS. Made with ❤️</div>
+  </footer>
+
+  <script>
+  // ——— utilities
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const supportsDialog = typeof HTMLDialogElement !== 'undefined' && 'showModal' in HTMLDialogElement.prototype;
+
+  // Footer year
+  $('#y').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  (function(){
+    const btn = $('.hamburger');
+    const menu = $('[data-menu]');
+    btn?.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  })();
+
+  // Lightbox (accessible, focus-trap, Esc/overlay close)
+  if (supportsDialog) {
+    let lastActive = null;
+
+    $$('.lightbox-open').forEach(a => {
+      a.addEventListener('click', e => {
+        const dlgSel = a.getAttribute('data-dialog');
+        const dlg = $(dlgSel);
+        if (!dlg) return;
+        e.preventDefault();
+
+        lastActive = document.activeElement;
+        dlg.showModal();
+        document.documentElement.style.overflow = 'hidden'; // prevent background scroll
+
+        // Focus trap
+        const fEls = Array.from(dlg.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+        const first = fEls[0], last = fEls[fEls.length - 1];
+        first?.focus();
+
+        const trap = ev => {
+          if (ev.key === 'Tab') {
+            if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last?.focus(); }
+            else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first?.focus(); }
+          } else if (ev.key === 'Escape') {
+            dlg.close();
           }
-        } 
-        // Add new wish to display 
-        function addNewWish(wish) { 
-          const existingWishes = document.getElementById('existingWishes'); 
-          if (existingWishes) { 
-            const wishCard = document.createElement('div'); 
-            wishCard.className = 'wish-card new-wish'; 
-            wishCard.innerHTML = `
-              <h4>- ${wish.name}</h4>
-              <p>${wish.message}</p>
-            `; 
-            existingWishes.prepend(wishCard); 
-            // Animate new wish 
-            setTimeout(() => wishCard.classList.add('animated'), 100); 
-          } 
-        } 
-        // Create confetti effect 
-        function createConfetti() { 
-          const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']; 
-          for (let i = 0; i < 100; i++) { 
-            const confetti = document.createElement('div'); 
-            confetti.className = 'confetti'; 
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; 
-            confetti.style.left = Math.random() * 100 + 'vw'; 
-            confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; 
-            confetti.style.opacity = Math.random() * 0.5 + 0.5;
-            document.body.appendChild(confetti); 
-            setTimeout(() => confetti.remove(), 5000); 
-          } 
-        } 
-        // Show temporary message 
-        function showTemporaryMessage(message) { 
-          const msg = document.createElement('div'); 
-          msg.className = 'temp-message'; 
-          msg.textContent = message; 
-          document.body.appendChild(msg); 
-          setTimeout(() => msg.remove(), 3000); 
-        } 
-        // Play special effect (placeholder for sound or animation) 
-        function playSpecialEffect() { 
-          console.log('Playing special birthday effect!'); 
-          // Could add audio here if desired, e.g., new Audio('sound.mp3').play();
-        } 
-        // Add floating animations 
-        function addFloatingAnimations() { 
-          const elements = document.querySelectorAll('.message-card, .wish-card, .photo-card'); 
-          elements.forEach(el => { 
-            el.style.animation = 'float 3s ease-in-out infinite'; 
-          }); 
-        } 
-        // Create sparkles 
-        function createSparkles() { 
-          const sparkleContainer = document.body; 
-          for (let i = 0; i < 20; i++) { 
-            const sparkle = document.createElement('div'); 
-            sparkle.className = 'sparkle'; 
-            sparkle.style.left = Math.random() * 100 + '%'; 
-            sparkle.style.top = Math.random() * 100 + '%'; 
-            sparkle.style.animationDelay = Math.random() * 2 + 's'; 
-            sparkleContainer.appendChild(sparkle); 
-          } 
-        } 
-        // Add interactive effects 
-        function addInteractiveEffects() { 
-          const cards = document.querySelectorAll('.message-card, .wish-card, .photo-card'); 
-          cards.forEach(card => { 
-            card.addEventListener('mouseover', () => { 
-              card.style.transform = 'scale(1.05)'; 
-              card.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)'; 
-            }); 
-            card.addEventListener('mouseout', () => { 
-              card.style.transform = 'scale(1)'; 
-              card.style.boxShadow = 'none'; 
-            }); 
-          }); 
-        } 
-        // Celebration effect for new wishes 
-        function createCelebrationEffect() { 
-          createConfetti(); 
-          showTemporaryMessage('🎉 New wish added! 🎉'); 
-        }
-    </script>
+        };
+        dlg.addEventListener('keydown', trap);
+
+        // Close on backdrop, X, or outside image
+        dlg.addEventListener('click', ev => {
+          const img = dlg.querySelector('img');
+          if (ev.target === dlg || ev.target.tagName === 'BUTTON' || !img.contains(ev.target)) dlg.close();
+        });
+
+        dlg.addEventListener('close', () => {
+          document.documentElement.style.overflow = '';
+          dlg.removeEventListener('keydown', trap);
+          lastActive?.focus();
+        }, { once: true });
+      });
+    });
+  }
+  </script>
+
+  <noscript>
+    <style>.menu{display:block}.hamburger{display:none}</style>
+  </noscript>
 </body>
 </html>
